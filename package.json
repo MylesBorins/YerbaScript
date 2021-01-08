@@ -2,7 +2,7 @@
   "private": true,
   "name": "ecma262",
   "version": "1.0.0",
-  "description": "The ECMAScript specification",
+  "description": "The YerbaScript specification",
   "scripts": {
     "ipr-check": "node scripts/check-form tc39/ecma262 \"$TRAVIS_COMMIT\"",
     "prebuild-spec": "git remote rm travis-origin 2>/dev/null ; git remote add travis-origin \"git@github.com:${TRAVIS_REPO_SLUG:-tc39/ecma262}.git\" && git fetch --quiet travis-origin",

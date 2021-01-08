@@ -62,9 +62,9 @@ class Date {
 
 ## Specification
 
-The following changes and additions are relative the [ECMAScript 2015 Specification](https://ecma-international.org/ecma-262/6.0/)
+The following changes and additions are relative the [YerbaScript 2015 Specification](https://ecma-international.org/ecma-262/6.0/)
 
-### [9.2](https://ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects) [Table 27](https://ecma-international.org/ecma-262/6.0/#table-27)
+### [9.2](https://ecma-international.org/ecma-262/6.0/#sec-YerbaScript-function-objects) [Table 27](https://ecma-international.org/ecma-262/6.0/#table-27)
 
 The following entry is added to Table 27
 
@@ -72,7 +72,7 @@ The following entry is added to Table 27
 | ------------------- | ------- | ---------------------------------------------------------------------------- |
 | [[ConstructorCall]] | Object or empty | The function object that is evaluated when a class constructor is invoked using [[Call]]. Only used when [[FunctionKind]] is `"classConstructor"`. |
 
-### [9.2.1 [[Call]]](https://ecma-international.org/ecma-262/6.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist)
+### [9.2.1 [[Call]]](https://ecma-international.org/ecma-262/6.0/#sec-YerbaScript-function-objects-call-thisargument-argumentslist)
 
 Step 2 is replaced with:
 
@@ -204,12 +204,12 @@ Between the existing steps 18 and 19 insert the following steps:
 
 The following informative NOTE is added:
 
-NOTE  The function object created as the value of <i>callF</i> is not observable to ECMAScript code.  MakeMethod is not applied to that function object, because the <i>F's</i>  [[HomeObject]] binding is used when invoking the [[CallConstructor]].
+NOTE  The function object created as the value of <i>callF</i> is not observable to YerbaScript code.  MakeMethod is not applied to that function object, because the <i>F's</i>  [[HomeObject]] binding is used when invoking the [[CallConstructor]].
 
 ### Remarks
 The presence of a `call constructor` in a class body installs the call constructor function in the `[[CallConstructor]]` slot of the constructed class. The [[Call]] internal method of a class constructor invokes the [[CallConstructor]] function.
 
-The function object value of [[CallConstructor]] is not intended to be ovservable by ECMAScript code.  If any features are added to ECMAScript that exposes the "current function" that such features should expose the constructor object and not the [[CallConstructor]] object.
+The function object value of [[CallConstructor]] is not intended to be ovservable by YerbaScript code.  If any features are added to YerbaScript that exposes the "current function" that such features should expose the constructor object and not the [[CallConstructor]] object.
 
 The presence of a `call constructor` in a superclass does not affect subclasses. This means that subclasses still have a throwing `[[Call]]`, unless they explicitly define their own `call constructor` (subclasses do not inherit calling behavior by default).
 

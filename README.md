@@ -1,11 +1,11 @@
 
-ECMAScript
+YerbaScript
 ====
 
 ## This repo
 
 This repository contains the source for the current draft of ECMA-262,
-the ECMAScript® Language Specification.
+the YerbaScript® Language Specification.
 
 This source is processed to obtain a human-readable version,
 which you can view [here](https://tc39.es/ecma262/).
@@ -24,7 +24,7 @@ Proposals follow [the TC39 process](https://tc39.es/process-document/) and are t
 
 ### Contributing New Proposals
 
-Please see [Contributing to ECMAScript](/CONTRIBUTING.md) for the most up-to-date information on contributing proposals to this standard.
+Please see [Contributing to YerbaScript](/CONTRIBUTING.md) for the most up-to-date information on contributing proposals to this standard.
 
 ## Developing the Specification
 
@@ -32,6 +32,6 @@ After cloning, do `npm install` to set up your environment. You can then do `npm
 
 ## Community
 
-* [ES discourse](https://es.discourse.group/): Discourse for ECMAScript discussion and questions
-* [Es-discuss mailing list](https://esdiscuss.org): Mailing list for ECMAScript discussions
+* [ES discourse](https://es.discourse.group/): Discourse for YerbaScript discussion and questions
+* [Es-discuss mailing list](https://esdiscuss.org): Mailing list for YerbaScript discussions
 * IRC: #tc39 on Freenode ([instructions](https://freenode.net/kb/answer/chat))

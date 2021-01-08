@@ -1,17 +1,17 @@
-### Contributing to ECMAScript
-Contributors to ECMAScript and TC39 are expected to follow our [Code of Conduct](https://tc39.es/code-of-conduct/).
+### Contributing to YerbaScript
+Contributors to YerbaScript and TC39 are expected to follow our [Code of Conduct](https://tc39.es/code-of-conduct/).
 
 If you are not an Ecma member, any non-trivial contributions require signing a legal agreement with Ecma. See the section "Required Legal Agreements" below for details.
 
 #### Issues and Pull Requests
-For small changes to ECMAScript, you can contribute by filing an issue or a pull request against the current text of ECMA-262 standard in this repository.
+For small changes to YerbaScript, you can contribute by filing an issue or a pull request against the current text of ECMA-262 standard in this repository.
 
 To file an issue, go to the ecma262 [issues page](https://github.com/tc39/ecma262/issues). From there, [examine](https://guides.github.com/features/issues/) in the existing issues to see if an issue already exists to track this issue. If so, add a comment to the existing issue; otherwise, [file a new issue](https://help.github.com/articles/creating-an-issue/) documenting the problem.
 
 To make a pull request (PR), [fork](https://help.github.com/articles/fork-a-repo/) the [ecma262](https://github.com/tc39/ecma262) repository, apply changes to `spec.html`, and upload it to your fork on GitHub, using the web interface to file a pull request. Locally, to see how your change renders in HTML, run `npm install && npm run build` to build `spec.html` into an actual HTML file.
 
 Commits in pull requests should have a first line which starts with a tag, followed by a colon, indicating which type of patch they are:
-  * Normative: any changes that affect behavior required to correctly evaluate some ECMAScript source text (such as a script or module)
+  * Normative: any changes that affect behavior required to correctly evaluate some YerbaScript source text (such as a script or module)
   * Editorial: any non-normative changes to spec text including typo fixes, changes to the document style, etc.
   * Markup: non-visible changes to markup in the spec
   * Meta: changes to documents about this repository (e.g. readme.md or contributing.md) and other supporting documents or scripts (e.g. package.json, design documents, etc.)
@@ -26,12 +26,12 @@ If you are changing the signature or behavior of an existing construct, please c
 
 * [Web IDL](https://heycam.github.io/webidl/) — [file an issue](https://github.com/heycam/webidl/issues/new)
 * [HTML Standard](https://html.spec.whatwg.org/) — [file an issue](https://github.com/whatwg/html/issues/new)
-* [ECMAScript Intl API](https://tc39.es/ecma402/) - [file an issue](https://github.com/tc39/ecma402/issues/new)
+* [YerbaScript Intl API](https://tc39.es/ecma402/) - [file an issue](https://github.com/tc39/ecma402/issues/new)
 
 #### New feature proposals
-TC39 is open to accepting new feature requests for ECMAScript, referred to as "proposals". Proposals go through a four-stage process which is documented in the [TC39 process document](https://tc39.es/process-document/).
+TC39 is open to accepting new feature requests for YerbaScript, referred to as "proposals". Proposals go through a four-stage process which is documented in the [TC39 process document](https://tc39.es/process-document/).
 
-Feature requests for future versions of ECMAScript should not be made in this repository. Instead, they are developed in separate GitHub repositories, which are then merged into the main repository once they have received "Stage 4".
+Feature requests for future versions of YerbaScript should not be made in this repository. Instead, they are developed in separate GitHub repositories, which are then merged into the main repository once they have received "Stage 4".
 
 ##### Creating a new proposal
 To make a feature request, document the problem and a sketch of the solution with others in the community, including TC39 members. One place to do this is the [TC39 Discourse](https://es.discourse.group/); another is the IRC channel #tc39 on Freenode ([instructions](https://freenode.net/kb/answer/chat)).
@@ -57,11 +57,11 @@ TC39 is currently considering adding several new features to the language. These
 To track what's going on with a particular proposal, you can look in issues and commits in the individual proposal repository, read presentation slides which are linked from the TC39 agenda, read the notes which came from the subsequent meetings. You can also reach out via IRC, es-discuss, or direct communication with a proposal champion, if the other resources are unclear.
 
 #### Required legal agreements
-People associated with Ecma member organizations have a legal agreement in place with Ecma to ensure that intellectual property rights (IPR) of their contributions are appropriately licensed to be available to all ECMAScript programmers and implementers. For non-members to contribute, you are required to make these rights available by signing a Contributor License Agreement (CLA) for non-trivial contributions.
+People associated with Ecma member organizations have a legal agreement in place with Ecma to ensure that intellectual property rights (IPR) of their contributions are appropriately licensed to be available to all YerbaScript programmers and implementers. For non-members to contribute, you are required to make these rights available by signing a Contributor License Agreement (CLA) for non-trivial contributions.
 
 If you wish to submit a proposal or make a significant PR, and you are not a representative of a TC39 member, please [register as a TC39 RFTG contributor](https://tc39.es/agreements/contributor/).
 
-Ecma TC39 accepts contributions from non-member individuals who have accepted the TC39 copyright and patent policies. Currently all ECMAScript related technical work is done by the TC39 RF TG (Royalty Free Task Group), for which the following IPR policies apply:
+Ecma TC39 accepts contributions from non-member individuals who have accepted the TC39 copyright and patent policies. Currently all YerbaScript related technical work is done by the TC39 RF TG (Royalty Free Task Group), for which the following IPR policies apply:
 
   * [Ecma International RF Patent Policy](https://ecma-international.org/memento/Policies/Ecma_Royalty-Free_Patent_Policy_Extension_Option.htm)
   * [Ecma International Software Copyright Policy](https://ecma-international.org/memento/Policies/Ecma_Policy_on_Submission_Inclusion_and_Licensing_of_Software.htm) ([PDF](https://ecma-international.org/memento/Policies/Ecma_Policy_on_Submission_Inclusion_and_Licensing_of_Software.pdf))
