@@ -529,7 +529,7 @@
     <emu-clause id="sec-lexical-and-regexp-grammars">
       <h1>The Lexical and RegExp Grammars</h1>
       <p>A <em>lexical grammar</em> for YerbaScript is given in clause <emu-xref href="#sec-YerbaScript-language-lexical-grammar"></emu-xref>. This grammar has as its terminal symbols Unicode code points that conform to the rules for |SourceCharacter| defined in <emu-xref href="#sec-source-text"></emu-xref>. It defines a set of productions, starting from the goal symbol |InputElementDiv|, |InputElementTemplateTail|, or |InputElementRegExp|, or |InputElementRegExpOrTemplateTail|, that describe how sequences of such code points are translated into a sequence of input elements.</p>
-      <p>Input elements other than white space and comments form the terminal symbols for the syntactic grammar for YerbaScript and are called YerbaScript <em>tokens</em>. These tokens are the reserved words, identifiers, literals, and punctuators of the YerbaScript language. Moreover, line terminators, although not considered to be tokens, also become part of the stream of input elements and guide the process of automatic semicolon insertion (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>). Simple white space and single-line comments are discarded and do not appear in the stream of input elements for the syntactic grammar. A |MultiLineComment| (that is, a comment of the form `/*`&hellip;`*/` regardless of whether it spans more than one line) is likewise simply discarded if it contains no line terminator; but if a |MultiLineComment| contains one or more line terminators, then it is replaced by a single line terminator, which becomes part of the stream of input elements for the syntactic grammar.</p>
+      <p>Input elements other than white space and comments form the terminal symbols for the syntactic grammar for YerbaScript and are called YerbaScript <em>tokens</em>. These tokens are the reserved words, identifiers, literals, and punctuators of the YerbaScript language. Moreover, line terminators, although not considered to be tokens, also become part of the stream of input elements. Simple white space and single-line comments are discarded and do not appear in the stream of input elements for the syntactic grammar. A |MultiLineComment| (that is, a comment of the form `/*`&hellip;`*/` regardless of whether it spans more than one line) is likewise simply discarded if it contains no line terminator; but if a |MultiLineComment| contains one or more line terminators, then it is replaced by a single line terminator, which becomes part of the stream of input elements for the syntactic grammar.</p>
       <p>A <em>RegExp grammar</em> for YerbaScript is given in <emu-xref href="#sec-patterns"></emu-xref>. This grammar also has as its terminal symbols the code points as defined by |SourceCharacter|. It defines a set of productions, starting from the goal symbol |Pattern|, that describe how sequences of code points are translated into regular expression patterns.</p>
       <p>Productions of the lexical and RegExp grammars are distinguished by having two colons &ldquo;<b>::</b>&rdquo; as separating punctuation. The lexical and RegExp grammars share some productions.</p>
     </emu-clause>
@@ -10301,7 +10301,7 @@
 
     <emu-clause id="sec-directive-prologues-and-the-use-strict-directive">
       <h1>Directive Prologues and the Use Strict Directive</h1>
-      <p>A <dfn id="directive-prologue">Directive Prologue</dfn> is the longest sequence of |ExpressionStatement|s occurring as the initial |StatementListItem|s or |ModuleItem|s of a |FunctionBody|, a |ScriptBody|, or a |ModuleBody| and where each |ExpressionStatement| in the sequence consists entirely of a |StringLiteral| token followed by a semicolon. The semicolon may appear explicitly or may be inserted by automatic semicolon insertion (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>). A Directive Prologue may be an empty sequence.</p>
+      <p>A <dfn id="directive-prologue">Directive Prologue</dfn> is the longest sequence of |ExpressionStatement|s occurring as the initial |StatementListItem|s or |ModuleItem|s of a |FunctionBody|, a |ScriptBody|, or a |ModuleBody| and where each |ExpressionStatement| in the sequence consists entirely of a |StringLiteral| token followed by a semicolon. A Directive Prologue may be an empty sequence.</p>
       <p>A <dfn id="use-strict-directive">Use Strict Directive</dfn> is an |ExpressionStatement| in a Directive Prologue whose |StringLiteral| is either of the exact code point sequences `"use strict"` or `'use strict'`. A Use Strict Directive may not contain an |EscapeSequence| or |LineContinuation|.</p>
       <p>A Directive Prologue may contain more than one Use Strict Directive. However, an implementation may issue a warning if this occurs.</p>
       <emu-note>
@@ -10347,7 +10347,6 @@
   <p>The source text of an YerbaScript |Script| or |Module| is first converted into a sequence of input elements, which are tokens, line terminators, comments, or white space. The source text is scanned from left to right, repeatedly taking the longest possible sequence of code points as the next input element.</p>
   <p>There are several situations where the identification of lexical input elements is sensitive to the syntactic grammar context that is consuming the input elements. This requires multiple goal symbols for the lexical grammar. The |InputElementRegExpOrTemplateTail| goal is used in syntactic grammar contexts where a |RegularExpressionLiteral|, a |TemplateMiddle|, or a |TemplateTail| is permitted. The |InputElementRegExp| goal symbol is used in all syntactic grammar contexts where a |RegularExpressionLiteral| is permitted but neither a |TemplateMiddle|, nor a |TemplateTail| is permitted. The |InputElementTemplateTail| goal is used in all syntactic grammar contexts where a |TemplateMiddle| or a |TemplateTail| is permitted but a |RegularExpressionLiteral| is not permitted. In all other contexts, |InputElementDiv| is used as the lexical goal symbol.</p>
   <emu-note>
-    <p>The use of multiple lexical goals ensures that there are no lexical ambiguities that would affect automatic semicolon insertion. For example, there are no syntactic grammar contexts where both a leading division or division-assignment, and a leading |RegularExpressionLiteral| are permitted. This is not affected by semicolon insertion (see <emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>); in examples such as the following:</p>
     <pre><code class="javascript">
       a = b
       /hi/g.exec(c).map(d);
@@ -10580,7 +10579,7 @@
 
   <emu-clause id="sec-line-terminators">
     <h1>Line Terminators</h1>
-    <p>Like white space code points, line terminator code points are used to improve source text readability and to separate tokens (indivisible lexical units) from each other. However, unlike white space code points, line terminators have some influence over the behaviour of the syntactic grammar. In general, line terminators may occur between any two tokens, but there are a few places where they are forbidden by the syntactic grammar. Line terminators also affect the process of automatic semicolon insertion (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>). A line terminator cannot occur within any token except a |StringLiteral|, |Template|, or |TemplateSubstitutionTail|. &lt;LF&gt; and &lt;CR&gt; line terminators cannot occur within a |StringLiteral| token except as part of a |LineContinuation|.</p>
+    <p>Like white space code points, line terminator code points are used to improve source text readability and to separate tokens (indivisible lexical units) from each other. However, unlike white space code points, line terminators have some influence over the behaviour of the syntactic grammar. In general, line terminators may occur between any two tokens, but there are a few places where they are forbidden by the syntactic grammar. A line terminator cannot occur within any token except a |StringLiteral|, |Template|, or |TemplateSubstitutionTail|. &lt;LF&gt; and &lt;CR&gt; line terminators cannot occur within a |StringLiteral| token except as part of a |LineContinuation|.</p>
     <p>A line terminator can occur within a |MultiLineComment| but cannot occur within a |SingleLineComment|.</p>
     <p>Line terminators are included in the set of white space code points that are matched by the `\\s` class in regular expressions.</p>
     <p>The YerbaScript line terminator code points are listed in <emu-xref href="#table-line-terminator-code-points"></emu-xref>.</p>
@@ -10666,7 +10665,7 @@
   <emu-clause id="sec-comments">
     <h1>Comments</h1>
     <p>Comments can be either single or multi-line. Multi-line comments cannot nest.</p>
-    <p>Because a single-line comment can contain any Unicode code point except a |LineTerminator| code point, and because of the general rule that a token is always as long as possible, a single-line comment always consists of all code points from the `//` marker to the end of the line. However, the |LineTerminator| at the end of the line is not considered to be part of the single-line comment; it is recognized separately by the lexical grammar and becomes part of the stream of input elements for the syntactic grammar. This point is very important, because it implies that the presence or absence of single-line comments does not affect the process of automatic semicolon insertion (see <emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>).</p>
+    <p>Because a single-line comment can contain any Unicode code point except a |LineTerminator| code point, and because of the general rule that a token is always as long as possible, a single-line comment always consists of all code points from the `//` marker to the end of the line. However, the |LineTerminator| at the end of the line is not considered to be part of the single-line comment; it is recognized separately by the lexical grammar and becomes part of the stream of input elements for the syntactic grammar.</p>
     <p>Comments behave like white space and are discarded except that, if a |MultiLineComment| contains a line terminator code point, then the entire comment is considered to be a |LineTerminator| for purposes of parsing by the syntactic grammar.</p>
     <h2>Syntax</h2>
     <emu-grammar type="definition">
@@ -11804,194 +11803,6 @@
       </emu-clause>
     </emu-clause>
   </emu-clause>
-
-  <emu-clause id="sec-automatic-semicolon-insertion">
-    <h1>Automatic Semicolon Insertion</h1>
-    <p>Most YerbaScript statements and declarations must be terminated with a semicolon. Such semicolons may always appear explicitly in the source text. For convenience, however, such semicolons may be omitted from the source text in certain situations. These situations are described by saying that semicolons are automatically inserted into the source code token stream in those situations.</p>
-
-    <emu-clause id="sec-rules-of-automatic-semicolon-insertion" namespace="asi-rules">
-      <h1>Rules of Automatic Semicolon Insertion</h1>
-      <p>In the following rules, &ldquo;token&rdquo; means the actual recognized lexical token determined using the current lexical goal symbol as described in clause <emu-xref href="#sec-YerbaScript-language-lexical-grammar"></emu-xref>.</p>
-      <p>There are three basic rules of semicolon insertion:</p>
-      <ol>
-        <li>
-          <p>When, as the source text is parsed from left to right, a token (called the <em>offending token</em>) is encountered that is not allowed by any production of the grammar, then a semicolon is automatically inserted before the offending token if one or more of the following conditions is true:</p>
-          <ul>
-            <li>
-              The offending token is separated from the previous token by at least one |LineTerminator|.
-            </li>
-            <li>
-              The offending token is `}`.
-            </li>
-            <li>
-              The previous token is `)` and the inserted semicolon would then be parsed as the terminating semicolon of a do-while statement (<emu-xref href="#sec-do-while-statement"></emu-xref>).
-            </li>
-          </ul>
-        </li>
-        <li>
-          When, as the source text is parsed from left to right, the end of the input stream of tokens is encountered and the parser is unable to parse the input token stream as a single instance of the goal nonterminal, then a semicolon is automatically inserted at the end of the input stream.
-        </li>
-        <li>
-          When, as the source text is parsed from left to right, a token is encountered that is allowed by some production of the grammar, but the production is a <em>restricted production</em> and the token would be the first token for a terminal or nonterminal immediately following the annotation &ldquo;[no |LineTerminator| here]&rdquo; within the restricted production (and therefore such a token is called a restricted token), and the restricted token is separated from the previous token by at least one |LineTerminator|, then a semicolon is automatically inserted before the restricted token.
-        </li>
-      </ol>
-      <p>However, there is an additional overriding condition on the preceding rules: a semicolon is never inserted automatically if the semicolon would then be parsed as an empty statement or if that semicolon would become one of the two semicolons in the header of a `for` statement (see <emu-xref href="#sec-for-statement"></emu-xref>).</p>
-      <emu-note>
-        <p>The following are the only restricted productions in the grammar:</p>
-        <emu-grammar>
-          UpdateExpression[Yield, Await] :
-            LeftHandSideExpression[?Yield, ?Await] [no LineTerminator here] `++`
-            LeftHandSideExpression[?Yield, ?Await] [no LineTerminator here] `--`
-
-          ContinueStatement[Yield, Await] :
-            `continue` `;`
-            `continue` [no LineTerminator here] LabelIdentifier[?Yield, ?Await] `;`
-
-          BreakStatement[Yield, Await] :
-            `break` `;`
-            `break` [no LineTerminator here] LabelIdentifier[?Yield, ?Await] `;`
-
-          ReturnStatement[Yield, Await] :
-            `return` `;`
-            `return` [no LineTerminator here] Expression[+In, ?Yield, ?Await] `;`
-
-          ThrowStatement[Yield, Await] :
-            `throw` [no LineTerminator here] Expression[+In, ?Yield, ?Await] `;`
-
-          ArrowFunction[In, Yield, Await] :
-            ArrowParameters[?Yield, ?Await] [no LineTerminator here] `=&gt;` ConciseBody[?In]
-
-          YieldExpression[In, Await] :
-            `yield`
-            `yield` [no LineTerminator here] AssignmentExpression[?In, +Yield, ?Await]
-            `yield` [no LineTerminator here] `*` AssignmentExpression[?In, +Yield, ?Await]
-        </emu-grammar>
-        <p>The practical effect of these restricted productions is as follows:</p>
-        <ul>
-          <li>
-            When a `++` or `--` token is encountered where the parser would treat it as a postfix operator, and at least one |LineTerminator| occurred between the preceding token and the `++` or `--` token, then a semicolon is automatically inserted before the `++` or `--` token.
-          </li>
-          <li>
-            When a `continue`, `break`, `return`, `throw`, or `yield` token is encountered and a |LineTerminator| is encountered before the next token, a semicolon is automatically inserted after the `continue`, `break`, `return`, `throw`, or `yield` token.
-          </li>
-        </ul>
-        <p>The resulting practical advice to YerbaScript programmers is:</p>
-        <ul>
-          <li>
-            A postfix `++` or `--` operator should appear on the same line as its operand.
-          </li>
-          <li>
-            An |Expression| in a `return` or `throw` statement or an |AssignmentExpression| in a `yield` expression should start on the same line as the `return`, `throw`, or `yield` token.
-          </li>
-          <li>
-            A |LabelIdentifier| in a `break` or `continue` statement should be on the same line as the `break` or `continue` token.
-          </li>
-        </ul>
-      </emu-note>
-    </emu-clause>
-
-    <emu-clause id="sec-examples-of-automatic-semicolon-insertion">
-      <h1>Examples of Automatic Semicolon Insertion</h1>
-      <em>This section is non-normative.</em>
-      <p>The source</p>
-      <pre><code class="javascript">{ 1 2 } 3</code></pre>
-      <p>is not a valid sentence in the YerbaScript grammar, even with the automatic semicolon insertion rules. In contrast, the source</p>
-      <pre><code class="javascript">
-        { 1
-        2 } 3
-      </code></pre>
-      <p>is also not a valid YerbaScript sentence, but is transformed by automatic semicolon insertion into the following:</p>
-      <pre><code class="javascript">
-        { 1
-        ;2 ;} 3;
-      </code></pre>
-      <p>which is a valid YerbaScript sentence.</p>
-      <p>The source</p>
-      <pre><code class="javascript">
-        for (a; b
-        )
-      </code></pre>
-      <p>is not a valid YerbaScript sentence and is not altered by automatic semicolon insertion because the semicolon is needed for the header of a `for` statement. Automatic semicolon insertion never inserts one of the two semicolons in the header of a `for` statement.</p>
-      <p>The source</p>
-      <pre><code class="javascript">
-        return
-        a + b
-      </code></pre>
-      <p>is transformed by automatic semicolon insertion into the following:</p>
-      <pre><code class="javascript">
-        return;
-        a + b;
-      </code></pre>
-      <emu-note>
-        <p>The expression `a + b` is not treated as a value to be returned by the `return` statement, because a |LineTerminator| separates it from the token `return`.</p>
-      </emu-note>
-      <p>The source</p>
-      <pre><code class="javascript">
-        a = b
-        ++c
-      </code></pre>
-      <p>is transformed by automatic semicolon insertion into the following:</p>
-      <pre><code class="javascript">
-        a = b;
-        ++c;
-      </code></pre>
-      <emu-note>
-        <p>The token `++` is not treated as a postfix operator applying to the variable `b`, because a |LineTerminator| occurs between `b` and `++`.</p>
-      </emu-note>
-      <p>The source</p>
-      <pre><code class="javascript">
-        if (a &gt; b)
-        else c = d
-      </code></pre>
-      <p>is not a valid YerbaScript sentence and is not altered by automatic semicolon insertion before the `else` token, even though no production of the grammar applies at that point, because an automatically inserted semicolon would then be parsed as an empty statement.</p>
-      <p>The source</p>
-      <pre><code class="javascript">
-        a = b + c
-        (d + e).print()
-      </code></pre>
-      <p>is <em>not</em> transformed by automatic semicolon insertion, because the parenthesized expression that begins the second line can be interpreted as an argument list for a function call:</p>
-      <pre><code class="javascript">a = b + c(d + e).print()</code></pre>
-      <p>In the circumstance that an assignment statement must begin with a left parenthesis, it is a good idea for the programmer to provide an explicit semicolon at the end of the preceding statement rather than to rely on automatic semicolon insertion.</p>
-    </emu-clause>
-  </emu-clause>
-  <emu-clause id="sec-interesting-cases-of-automatic-semicolon-insertion">
-    <h1>Interesting Cases of Automatic Semicolon Insertion</h1>
-    <em>This section is non-normative.</em>
-    <p>YerbaScript programs can be written in a style with very few semicolons by relying on automatic semicolon insertion. As described above, semicolons are not inserted at every newline, and automatic semicolon insertion can depend on multiple tokens across line terminators.</p>
-
-    <p>As new syntactic features are added to YerbaScript, additional grammar productions could be added that cause lines relying on automatic semicolon insertion preceding them to change grammar productions when parsed.</p>
-
-    <p>For the purposes of this section, a case of automatic semicolon insertion is considered interesting if it is a place where a semicolon may or may not be inserted, depending on the source text which precedes it. The rest of this section describes a number of interesting cases of automatic semicolon insertion in this version of YerbaScript.</p>
-    <emu-clause id="sec-asi-interesting-cases-in-statement-lists">
-      <h1>Interesting Cases of Automatic Semicolon Insertion in Statement Lists</h1>
-      <p>In a |StatementList|, many |StatementListItem|s end in semicolons, which may be omitted using automatic semicolon insertion. As a consequence of the rules above, at the end of a line ending an expression, a semicolon is required if the following line begins with any of the following:</p>
-      <ul>
-        <li><strong>An opening parenthesis (<code>(</code>)</strong>. Without a semicolon, the two lines together are treated as a |CallExpression|.</li>
-        <li><strong>An opening square bracket (<code>[</code>)</strong>. Without a semicolon, the two lines together are treated as property access, rather than an |ArrayLiteral| or |ArrayAssignmentPattern|.</li>
-        <li><strong>A template literal (<code>`</code>)</strong>. Without a semicolon, the two lines together are interpreted as a tagged Template (<emu-xref href="#sec-tagged-templates"></emu-xref>), with the previous expression as the |MemberExpression|.</li>
-        <li><strong>Unary <code>+</code> or <code>-</code></strong>. Without a semicolon, the two lines together are interpreted as a usage of the corresponding binary operator.</li>
-        <li><strong>A RegExp literal</strong>. Without a semicolon, the two lines together may be parsed instead as the `/` |MultiplicativeOperator|, for example if the RegExp has flags.</li>
-      </ul>
-    </emu-clause>
-  </emu-clause>
-  <emu-clause id="sec-asi-cases-with-no-lineterminator-here">
-    <h1>Cases of Automatic Semicolon Insertion and &ldquo;[no |LineTerminator| here]&rdquo;</h1>
-    <em>This section is non-normative.</em>
-    <p>YerbaScript contains grammar productions which include &ldquo;[no |LineTerminator| here]&rdquo;. These productions are sometimes a means to have optional operands in the grammar. Introducing a |LineTerminator| in these locations would change the grammar production of a source text by using the grammar production without the optional operand.</p>
-
-    <p>The rest of this section describes a number of productions using &ldquo;[no |LineTerminator| here]&rdquo; in this version of YerbaScript.</p>
-    <emu-clause id="sec-no-lineterminator-here-automatic-semicolon-insertion-list">
-      <h1>List of Grammar Productions with Optional Operands and &ldquo;[no |LineTerminator| here]&rdquo;</h1>
-      <ul>
-        <li>|UpdateExpression|.</li>
-        <li>|ContinueStatement|.</li>
-        <li>|BreakStatement|.</li>
-        <li>|ReturnStatement|.</li>
-        <li>|YieldExpression|.</li>
-        <li>Async Function Definitions (<emu-xref href="#sec-async-function-definitions"></emu-xref>) with relation to Function Definitions (<emu-xref href="#sec-function-definitions"></emu-xref>)</li>
-      </ul>
-    </emu-clause>
-  </emu-clause>
 </emu-clause>
 
 <emu-clause id="sec-YerbaScript-language-expressions">
@@ -12021,7 +11832,7 @@
     </emu-grammar>
 
     <emu-note>
-      <p>`yield` and `await` are permitted as |BindingIdentifier| in the grammar, and prohibited with static semantics below, to prohibit automatic semicolon insertion in cases such as</p>
+      <p>`yield` and `await` are permitted as |BindingIdentifier| in the grammar, and prohibited with static semantics below.</p>
       <pre><code class="javascript">
         let
         await 0;
@@ -13287,7 +13098,6 @@
           </li>
         </ul>
         <emu-note>
-          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code:</p>
           <pre><code class="javascript">
             a?.b
             `c`
@@ -13297,7 +13107,7 @@
             a.b
             `c`
           </code></pre>
-          <p>which is a valid statement and where automatic semicolon insertion does not apply.</p>
+          <p>which is a valid statement.</p>
         </emu-note>
 
         <emu-grammar>
@@ -43155,6 +42965,7 @@ THH:mm:ss.sss
 
 <emu-annex id="sec-additions-and-changes-that-introduce-incompatibilities-with-prior-editions">
   <h1>Additions and Changes That Introduce Incompatibilities with Prior Editions</h1>
+  <p><emu-xref href="#sec-reference-record-specification-type"></emu-xref>: In YerbaScript 2020, there is no Automatic Semicolon Insertion.</p>
   <p><emu-xref href="#sec-reference-record-specification-type"></emu-xref>: In YerbaScript 2015, Function calls are not allowed to return a Reference Record.</p>
   <p><emu-xref href="#sec-tonumber-applied-to-the-string-type"></emu-xref>: In YerbaScript 2015, ToNumber applied to a String value now recognizes and converts |BinaryIntegerLiteral| and |OctalIntegerLiteral| numeric strings. In previous editions such strings were converted to *NaN*.</p>
   <p><emu-xref href="#sec-code-realms"></emu-xref>: In YerbaScript 2018, Template objects are canonicalized based on Parse Node (source location), instead of across all occurrences of that template literal or tagged template in a Realm in previous editions.</p>
